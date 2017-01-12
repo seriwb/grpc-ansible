@@ -1,0 +1,8 @@
+---
+- name: "execute phalcon3 tasks"
+  include: phalcon3.yml
+  when: phalcon_version.startswith('3')
+  tags:
+    - php
+    - phalcon
+    - phalcon-devtools

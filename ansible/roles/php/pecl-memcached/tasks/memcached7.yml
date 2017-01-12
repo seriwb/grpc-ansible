@@ -1,0 +1,49 @@
+---
+- name: extract pecl memcached source code
+  git:
+    repo: https://github.com/php-memcached-dev/php-memcached.git
+    dest: "{{ src_dir }}/php-memcached"
+    version: php7
+    depth: 1
+  register: task_result
+  tags:
+    - php
+    - pecl-memcached
+    - memcached7
+
+- name: phpize
+  command: /usr/local/bin/phpize
+  args:
+    chdir: "{{ src_dir }}/php-memcached"
+  tags:
+    - php
+    - pecl-memcached
+    - memcached7
+
+- name: configure pecl memcached
+  command: ./configure --with-php-config=/usr/local/bin/php-config --disable-memcached-sasl
+  args:
+    chdir: "{{ src_dir }}/php-memcached"
+  tags:
+    - php
+    - pecl-memcached
+    - install
+    - memcached7
+
+- name: install pecl memcached
+  command: make install
+  args:
+    chdir: "{{ src_dir }}/php-memcached"
+  tags:
+    - php
+    - pecl-memcached
+    - install
+    - memcached7
+
+- name: configure php.ini
+  lineinfile: dest=/etc/php.d/memcached.ini line=extension=memcached.so state=present create=yes
+  tags:
+    - php
+    - pecl-memcached
+    - memcached7
+

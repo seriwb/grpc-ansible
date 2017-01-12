@@ -1,0 +1,14 @@
+src_dir: /usr/local/src
+install_path: /usr/local
+command_path: /usr/local/bin
+
+# 開発するアプリケーションの配置場所
+application_dir: /home/vagrant/repositories
+
+# ミドルウェアバージョン
+git_version: 2.11.0
+java_version: 1.8.0
+gradle_version: 3.1
+ruby_version: 2.4.0
+php_version: 7.0.14   # phalcon not support php 7.1 yet
+phalcon_version: 3.0.3

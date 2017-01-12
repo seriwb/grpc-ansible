@@ -1,0 +1,7 @@
+---
+- name: install raml2html
+  shell: npm i -g raml2html
+  tags:
+    - nodejs
+    - raml
+    - install

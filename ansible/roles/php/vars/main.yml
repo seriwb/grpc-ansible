@@ -1,0 +1,16 @@
+---
+php_configuration: >- 
+  --prefix=/usr/local
+  --with-config-file-path=/etc
+  --with-config-file-scan-dir=/etc/php.d
+  --enable-fpm
+  --enable-mbstring
+  --enable-mbregex
+  --with-gd
+  --enable-sockets
+  --with-curl
+  --with-openssl
+  --with-mysqli=mysqlnd
+  --with-pdo-mysql=mysqlnd
+  --enable-maintainer-zts
+  --enable-ftp

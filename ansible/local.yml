@@ -1,0 +1,24 @@
+- name: install Local Server
+  hosts: local
+  become: yes
+  roles:
+    - common
+    - gradle
+    - fabric
+    - nginx
+    - go
+    - grpc
+    - grpc/go
+    - php
+    - php/phalcon
+    - php/php-fpm
+    - php/pecl-memcached
+    - php/zip
+
+- name: local install tasks
+  hosts: local
+  become: no
+  roles:
+    - ruby
+    - nodejs
+    - nodejs/raml

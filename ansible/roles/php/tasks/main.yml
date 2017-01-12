@@ -1,0 +1,53 @@
+---
+- name: install dependent packages
+  yum: name={{ item }} state=present
+  with_items:
+    - gd-devel
+    - libjpeg-devel
+    - libpng-devel
+    - libxml2-devel
+    - libcurl-devel
+    - openssl-devel
+  tags:
+    - php
+
+- name: extract php source code
+  shell: curl -L http://jp2.php.net/get/php-{{ php_version }}.tar.bz2/from/this/mirror | tar jxf -
+  args:
+    chdir: "{{ src_dir }}"
+  tags:
+    - php
+
+- name: configure
+  command: ./configure {{ php_configuration }}
+  args:
+    chdir: "{{ src_dir }}/php-{{ php_version }}"
+  tags:
+    - php
+    - install
+
+- name: make clean
+  command: make clean
+  args:
+    chdir: "{{ src_dir }}/php-{{ php_version }}"
+  tags:
+    - php
+    - install
+
+- name: make install
+  command: make install
+  args:
+    chdir: "{{ src_dir }}/php-{{ php_version }}"
+  tags:
+    - php
+    - install
+
+- name: create config directory
+  file: path=/etc/php.d state=directory mode=0755
+  tags:
+    - php
+
+- name: copy php.ini
+  copy: src=php.ini dest=/etc/php.ini backup=yes
+  tags:
+    - php

@@ -1,0 +1,58 @@
+---
+- name: "extract phalcon3 source code"
+  shell: curl -L https://github.com/phalcon/cphalcon/archive/v{{ phalcon_version }}.tar.gz | tar zxvf -
+  args:
+    chdir: "{{ src_dir }}"
+  tags:
+    - php
+    - phalcon
+
+- name: "phpize"
+  command: /usr/local/bin/phpize
+  args:
+    chdir: "{{ src_dir }}/cphalcon-{{ phalcon_version }}/build/php7/64bits"
+  tags:
+    - php
+    - phalcon
+
+- name: "configure"
+  command: ./configure --enable-phalcon --with-php-config=/usr/local/bin/php-config
+  args:
+    chdir: "{{ src_dir }}/cphalcon-{{ phalcon_version }}/build/php7/64bits"
+  tags:
+    - php
+    - phalcon
+    - install
+
+- name: "make clean"
+  command: make clean
+  args:
+    chdir: "{{ src_dir }}/cphalcon-{{ phalcon_version }}/build/php7/64bits"
+  tags:
+    - php
+    - phalcon
+    - install
+
+- name: "make install"
+  command: make install
+  environment: 
+    CC: gcc
+    CFLAGS: -O2 -fno-delete-null-pointer-checks -finline-functions -fomit-frame-pointer 
+  args:
+    chdir: "{{ src_dir }}/cphalcon-{{ phalcon_version }}/build/php7/64bits"
+  tags:
+    - php
+    - phalcon
+    - install
+
+- name: "create phalcon.ini"
+  template: src=phalcon.ini.j2 dest=/etc/php.d/phalcon.ini
+  tags:
+    - php
+    - phalcon
+
+- name: phalcon developer tools install
+  include: phalcon-devtools.yml
+  tags:
+    - php
+    - phalcon

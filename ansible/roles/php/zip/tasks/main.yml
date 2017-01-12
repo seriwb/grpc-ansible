@@ -1,0 +1,19 @@
+---
+- name: pecl install zip
+  shell: /usr/local/bin/pecl install zip-1.13.1
+  register: task_result
+# 二回目以降のインストール時、終了ステータスが1を返してエラーと判断してしまうため、その対応です。
+# PHPのバージョンを変えたりした場合は、手動で/usr/local/bin/pecl uninstall zip-1.13.1を実行してください。
+  failed_when: '"pecl/zip is already installed" not in task_result.stdout and task_result.rc != 0'
+  changed_when: '"pecl/zip is already installed" not in task_result.stdout and task_result.rc == 0'
+  tags:
+    - php
+    - zip
+
+- name: configure php.ini
+  lineinfile: dest=/etc/php.d/zip.ini line=extension=zip.so state=present create=yes
+  failed_when: '"pecl/zip is already installed" not in task_result.stdout and task_result.rc != 0'
+  changed_when: '"pecl/zip is already installed" not in task_result.stdout and task_result.rc == 0'
+  tags:
+    - php
+    - zip

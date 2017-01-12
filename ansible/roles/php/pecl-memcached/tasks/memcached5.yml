@@ -1,0 +1,40 @@
+---
+- name: extract pecl memcached source code
+  shell: curl -L https://pecl.php.net/get/memcached-2.2.0.tgz | tar zxf -
+  args:
+    chdir: "{{ src_dir }}"
+  tags:
+    - php
+    - pecl-memcached
+
+- name: phpize
+  command: /usr/local/bin/phpize
+  args:
+    chdir: "{{ src_dir }}/memcached-2.2.0"
+  tags:
+    - php
+    - pecl-memcached
+
+- name: configure pecl memcached
+  command: ./configure --with-php-config=/usr/local/bin/php-config --disable-memcached-sasl
+  args:
+    chdir: "{{ src_dir }}/memcached-2.2.0"
+  tags:
+    - php
+    - pecl-memcached
+    - install
+
+- name: install pecl memcached
+  command: make install
+  args:
+    chdir: "{{ src_dir }}/memcached-2.2.0"
+  tags:
+    - php
+    - pecl-memcached
+    - install
+
+- name: configure php.ini
+  lineinfile: dest=/etc/php.d/memcached.ini line=extension=memcached.so state=present create=yes
+  tags:
+    - php
+    - pecl-memcached

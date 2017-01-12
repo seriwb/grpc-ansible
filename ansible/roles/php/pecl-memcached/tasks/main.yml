@@ -1,0 +1,41 @@
+---
+- name: extract libmemcached source code
+  shell: curl -L https://launchpad.net/libmemcached/1.0/1.0.18/+download/libmemcached-1.0.18.tar.gz | tar zxf -
+  args:
+    chdir: "{{ src_dir }}"
+  tags:
+    - php
+    - pecl-memcached
+
+- name: configure libmemcached
+  command: ./configure
+  args:
+    chdir: "{{ src_dir }}/libmemcached-1.0.18"
+  tags:
+    - php
+    - pecl-memcached
+    - install
+
+- name: install libmemcached
+  command: make install
+  args:
+    chdir: "{{ src_dir }}/libmemcached-1.0.18"
+  tags:
+    - php
+    - pecl-memcached
+    - install
+
+- name: "execute php5 tasks"
+  include: memcached5.yml
+  when: not php_version.startswith('7')
+  tags:
+    - php
+    - pecl-memcached
+
+- name: "execute php7 tasks"
+  include: memcached7.yml
+  when: php_version.startswith('7')
+  tags:
+    - php
+    - pecl-memcached
+    - memcached7

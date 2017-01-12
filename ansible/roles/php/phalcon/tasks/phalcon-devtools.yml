@@ -1,0 +1,24 @@
+---
+- name: "get phalcon developer tools"
+  get_url: url=https://github.com/phalcon/phalcon-devtools/archive/v{{ phalcon_version }}.tar.gz dest={{ src_dir }}/phalcon-devtools-{{ phalcon_version }}.tar.gz
+  tags:
+    - php
+    - phalcon
+    - phalcon-devtools
+
+- name: "phalcon developer tools unarchive"
+  unarchive: src={{ src_dir }}/phalcon-devtools-{{ phalcon_version }}.tar.gz dest={{ src_dir }} creates={{ src_dir }}/phalcon-devtools-{{ phalcon_version }} copy=no
+  register: result
+  tags:
+    - php
+    - phalcon
+    - phalcon-devtools
+
+- name: "phalcon developer tools install"
+  shell: |
+    ln -sf {{ src_dir }}/phalcon-devtools-{{ phalcon_version }}/phalcon.php /usr/bin/phalcon
+    chmod ugo+x /usr/bin/phalcon
+  tags:
+    - php
+    - phalcon
+    - phalcon-devtools
