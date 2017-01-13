@@ -24,14 +24,8 @@
     - php
     - php-fpm
 
-- name: systemctl daemon-reload
-  shell: systemctl daemon-reload
-  tags: 
-    - php
-    - php-fpm
-
 - name: ensure php-fpm is running (and enable it at boot)
-  service: name=php-fpm state=started enabled=yes
+  systemd: name=php-fpm state=started daemon_reload=yes enabled=yes
   tags: 
     - php
     - php-fpm

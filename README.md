@@ -43,28 +43,6 @@ $ vagrant plugin install <プラグイン名>
 ```
 
 
-### for Windows Users
-
-ホストOSにWindowsを利用する場合は、追加で以下の作業を行ってください。
-
-#### RSyncのインストール
-
-CygwinでRSyncをインストールしてください。  
-Cygwinを利用しない場合は、Chocolateyでのインストールがお奨めです。  
-Chocolateyをインストール後、以下のコマンドでインストールできます。
-
-```
-> choco install rsync
-```
-
-#### 環境変数の追加
-
-環境変数に以下を追加してください。
-
-- ```PATH```に```C:\ProgramData\chocolatey\lib```を追加（;区切り）
-- ```CYGWIN```に```nodosfilewarning```を追加（スペース区切り）
-
-
 ## 実行手順
 
 ホストOSのコンソールで、以下のコマンドを実行してください。  

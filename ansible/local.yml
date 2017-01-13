@@ -1,4 +1,5 @@
-- name: install Local Server
+---
+- name: install tasks for Local Server
   hosts: local
   become: yes
   roles:
@@ -15,7 +16,7 @@
     - php/pecl-memcached
     - php/zip
 
-- name: local install tasks
+- name: install tasks for local user
   hosts: local
   become: no
   roles:
