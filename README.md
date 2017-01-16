@@ -1,4 +1,4 @@
-# grpc-ansible
+# grpc-sample
 
 CentOS 7の仮想OS上に、gRPCを利用した開発環境を構築するプロジェクトです。  
 本プロジェクトは以下を利用します。
@@ -12,11 +12,11 @@ CentOS 7の仮想OS上に、gRPCを利用した開発環境を構築するプロ
 Provisioningで以下のAnsible Playbookが実行されます。  
 ※ホストOSにAnsibleは不要です。  
 
-    grpc-ansible/ansible/local.yml
+    grpc-sample/ansible/local.yml
 
 開発用のリポジトリは、以下のディレクトリに配置することを想定しています。
 
-    grpc-ansible/repositories
+    grpc-sample/repositories
 
 
 ## 実行要件
@@ -63,7 +63,7 @@ rsyncの自動同期を行う場合は、ゲストOS起動後に以下のコマ�
 
 本プロジェクトで利用するAnsibleのPlaybookです。
 
-    grpc-ansible/ansible
+    grpc-sample/ansible
 
 
 ## 実行要求
@@ -73,7 +73,7 @@ Vagrant以外から実行する場合は、実行環境にAnsible 2.2.0+ をイ�
 
 ## 開発環境構築の手動実行方法
 
-開発環境のサーバに```grpc-ansible/ansible```をコピーし、当該ディレクトリ上で以下のコマンドを実行してください。
+開発環境のサーバに```grpc-sample/ansible```をコピーし、当該ディレクトリ上で以下のコマンドを実行してください。
 
     ansible-playbook -i local local.yml
 
