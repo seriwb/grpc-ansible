@@ -1,0 +1,16 @@
+---
+- name: install composer locally
+  shell: curl -sS https://getcomposer.org/installer | {{ command_path }}/php
+  args:
+    chdir: "{{ src_dir }}"
+  tags:
+    - php
+    - composer
+
+- name: install composer globally
+  shell: mv composer.phar {{ command_path }}/composer
+  args:
+    chdir: "{{ src_dir }}"
+  tags:
+    - php
+    - composer
