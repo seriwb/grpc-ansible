@@ -8,13 +8,15 @@
     - fabric
     - nginx
     - go
-    - grpc
-    - grpc/go
     - php
     - php/phalcon
     - php/php-fpm
     - php/pecl-memcached
     - php/zip
+    - php/composer
+    - grpc
+    - grpc/go
+    - grpc/php
 
 - name: install tasks for local user
   hosts: local
