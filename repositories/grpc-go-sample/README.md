@@ -1,3 +1,7 @@
 GoでgRPCを利用するサンプル
 
-- 受信と送信
+GOPATHを別で定義していたので、このプロジェクトようにexportを実施
+export GOPATH=$GOPATH:~/repositories/grpc-go-sample
+
+  - grpc公式のexamples/helloworldを利用（go getでは位置されるやつ）
+

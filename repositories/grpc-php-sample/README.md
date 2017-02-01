@@ -1,8 +1,9 @@
 PHPでgRPCを利用するサンプル
 
-- 受信と送信
-- Phalcon
+- phpディレクトリはgrpc/examples/phpのコピーを配置
 
+
+## インストール時のメモ
 
 $ curl -O http://pear.php.net/go-pear.phar
 $ sudo php -d detect_unicode=0 go-pear.phar
